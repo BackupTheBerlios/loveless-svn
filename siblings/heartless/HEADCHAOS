@@ -1,0 +1,71 @@
+This is an interesting project for me, because I don't want to do anything without testing first. Anything.
+It makes it really interesting, deciding how to test, how to display tests...
+
+Regardless, it's making me think clearer about a lot of things, all the aspects of an application.
+
+-  I need something to run it, even cheaply, for now. Either a CGI script or a local :8000-like webserver.
+-  The data to start testing /that/ is provided by unittest.
+-  I need a templating engine that can dump to html text files, so running tests and viewing tests are
+   separate entities. Or a system that dumps tests to some variety of sequenced data, and is requested
+   by the templating engine directly or indirectly. I don't care yet.
+-  Test Cases for all of these individually and together. These test cases should always work, no matter what
+   I do.
+-  Hm, I wonder if this is where Amazon SimpleDB comes in. I could use that, access it to create sequences of
+   data for it... but in the end it seems like I'd be paying for what is in the end personal. SQLite sounds
+   like my best option, and the tests can use their own database. Heh, woo, the tests themselves are going to
+   be modelling. This is turning into an amazing project.
+-  Perhaps creating the modelling system incorporatively would be best in this situation, even if it's procedural
+   to begin with. That way testing is fully upkept in its construction and there isn't unnecessary entire files
+   worth of duplicated code or confusing calls to heartless.test.databasing .
+
+This all sums down to separate entities...
+
+0. End users.
+1. A display method, defined by end-users.
+2. Information to display, arranged and constructed by a templating language.
+3. A business logic gap between stored data and rendering,
+4. Stored data and a logical means to address it, 
+5. Unit testing both working it's way individually and top-down through the stacks to store the data.
+
+This looks somewhat familiar, only it has two more layers. It looks like the MVC paradigm, or just the
+web application layer paradigm if it is one, but with extra layers. And it stacks interestingly...
+
+Technically, there are 6 layers here... updated to fit this discovery. Six layers: User, Interface, Constructed Information, Business Logic, Database, Data input.
+
+Data flows from the bottom of the stack to the top, from the top to stage 4 and back, and unidirectionally between 2 and 4.
+
+The stack has "fixers" in there almost. The business logic provides more fine control of data before information is passed to a user-accessible layer. It acts like a buffer, almost, between the information to display and the data it is built from. Display method is almost another, but providing the opposite benefits. It is all case scenario, test data to fix against, so the user gets what they expect. It is predefined and unchangeable, whereas the business logic is freeform and personal.
+
+I don't like them operating in a stack though, it seems counterintuitive and frivolous. Though if each module operated on an input or output basis, providing two different services, I could pipe through only what I need and minimalize the weight of the system. Can I even do that? Let's look at it further, with a little ascii graph.
+
+                                        bi-directional
++-----------+  request  +-----------+  request/response  +----------------+
+| User      |  -------> | Interface | <----------------> | Business Logic |
++-----------+           +-----------+                    +----------------+
+                                                                 ^
+                                                                 | bi-directional request/response
+                                                                 v
+                                                         +----------------+
+                                                         | Databaser      |
+                                                         +----------------+
+
+Hmm... I'm lazy, so I'll finish with words; the interface can also call the databaser for caching, which is a
+bi-directional relationship; the user cannot call the databaser at all. Oh, there's the templater working in the same
+"bi-di" between Interface and Business Logic, though the themer will probably only be called by the interface.
+
+I want the templating system independent from the interface system because there will be so many different interfaces,
+and equally many and variant templates to use. By templates, I of course mean curses, html, xslt, json, xml, qt maybe, gtk maybe, windows maybe... I could even define different template handlers for IE6, IE7, and every good browser. (tee hee, I made a funny.)
+
+Christ, I'm a lunatic.
+
+Anyway, so they're independent.
+
+Interfacing, Templating, Thinking, Databasing, Testing. It's a full-circle project setup... And it constantly cycles through on it's own.
+
+Let's start at the... hm. Let's start by researching. I need a few answers on things like templating engines, or if I should write one myself. ORM might be something I borrow from the open source community, sqlalchemy is really nice.
+
+Business logic looks like it would sorta build itself out of necessity between Interface and the databaser... The interfacer seems like it's going to be defined by things like WSGI, BaseHTTPServer and the likes. Not entirely sure yet. Like I said, research.
+
+It has to be lightweight enough to run as a CGI script on project.heartcoder (which is also going to be www.heartcoder), and strong enough to provide the information snappy enough to not leave me distracted.
+
+Do I want another cigarette?
