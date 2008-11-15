@@ -69,3 +69,61 @@ Business logic looks like it would sorta build itself out of necessity between I
 It has to be lightweight enough to run as a CGI script on project.heartcoder (which is also going to be www.heartcoder), and strong enough to provide the information snappy enough to not leave me distracted.
 
 Do I want another cigarette?
+
+==
+
+Welcome to the second issue of headchaos.
+
+From the head:
+==============
+
+If the box is the boundary of constraints and conditions, then the trick is
+to find the box... don't think outside the box - find the box. - Andy Hunt & Dave Thomas
+
+Prerequisites:
+==============
+
+Project is a Mission-critical system.
+
+Problem Definition:
+-------------------
+
+Web applications right now are business-oriented, not extensibly user-oriented.
+Users currently must deal with applications designed for corporate use in corporate
+mindsets. In addition, this almost read-only application pattern is causing more
+and more to be lost in the vision of the internet, even with the hacks that exist.
+
+Without web browsers and true web applications, the options for a personal website
+are limited as it seems to Drupal, Wordpress, or hosting on a company's site and
+using their mission-critical, in-house software. Web browsers pose a problem
+entirely due to their read-only nature. Certainly, forms, POST, XMLHTTPRequest,
+Javascript exist, but in the end, it is the display of a page that a web browser
+does.
+
+Notes on Planning:
+------------------
+
+- Wiki: loveless.berlios.de or whatever it is.
+- Spiral Development ( Initial Project, Need time for each one )
+  - Problem: Concept of Reqs.
+  - Problem: Concept of Ops.
+  - Problem: Reqs Plan
+  - Problem: Risk Analysis
+  - Prototype: Hacked-Together and Barebones
+  - Requirements: Verification and Validation
+  - Requirements: Development Plan
+  - Requirements: Risk Analysis
+  - Prototype: Drafted
+  - Draft: Verification & Validation
+  - Draft: Test Plan
+  - Draft: Risk Analysis
+  - Prototype: Operational
+- Iterative Development ( Weekly Needs )
+  - Release Planning & Design
+  - Coding
+  - Integration
+  - Testing
+  - Implementation
+
+Concept of Requirements:
+------------------------
